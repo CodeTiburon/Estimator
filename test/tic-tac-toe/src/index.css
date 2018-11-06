@@ -1,0 +1,38 @@
+body {
+    font-family: 'Inconsolata', monospace;
+}
+
+.game {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.status {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.board-row {
+    display: flex;
+}
+
+.square {
+    width: 48px;
+    height: 48px;
+    background-color: #fff;
+    border: 1px solid #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.square.winning {
+    background-color: #ddd;
+}
+
+.moves .active {
+    font-weight: bold;
+}
+
+.moves .active button {
+    font-weight: bold;
+}

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700');
+
+// $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Fira Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.Toastify__toast--success {
+  @extend .alert-success;
+}
+
+.Toastify__toast--info {
+  @extend .alert-info;
+}
+
+.Toastify__toast--warning {
+  @extend .alert-warning;
+}
+
+.Toastify__toast--error {
+  @extend .alert-danger;
+}
+
+.Toastify__toast--default {
+  @extend .alert-primary;
+}
+
+.Toastify__close-button {
+  color: inherit;
+  font-weight: normal;
+}
