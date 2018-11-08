@@ -8,12 +8,15 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import todoApp from './includes/reducers';
 
-import { addTodo, toggleTodo } from './includes/actions';
+import { addTodo, removeTodo, toggleTodo } from './includes/actions';
 
 const store = createStore(todoApp);
 
 store.dispatch( addTodo('Calculate money') );
 store.dispatch( addTodo('Order cat food') );
+
+store.dispatch( removeTodo(1) );
+
 store.dispatch( addTodo('Order Minions HotWheels') );
 store.dispatch( addTodo('Ask to unplug headphones') );
 

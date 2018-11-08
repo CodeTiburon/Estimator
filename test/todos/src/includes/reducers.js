@@ -6,31 +6,46 @@ import {
     todoFilter,
 } from './actions.js';
 
-function todos(state = [], action) {
+const defaultTodos = {
+    nextId: 0,
+    items: [],
+}
+
+function todos(state = defaultTodos, action) {
     switch (action.type) {
         case actionTodo.ADD:
-            return [
-                ...state,
-                {
-                    text: action.text,
-                    completed: false,
-                }
-            ];
+            const nextId = state.items.length ? state.nextId + 1 : 0;
+
+            return {
+                nextId: nextId,
+                items: [
+                    ...state.items,
+                    {
+                        id: nextId,
+                        text: action.text,
+                        completed: false,
+                    }
+                ],
+            }
 
         case actionTodo.TOGGLE:
-            return state.map( (todo, index) => {
-                if ( index === action.id ) {
-                    return Object.assign({}, todo, {
-                        completed: !todo.completed,
-                    });
-                }
+            return Object.assign({}, state, {
+                items: state.items.map( item => {
+                    if ( item.id === action.id ) {
+                        return Object.assign({}, item, {
+                            completed: !item.completed,
+                        });
+                    }
 
-                return todo;
+                    return item;
+                })
             });
 
         case actionTodo.REMOVE:
-            return state.filter( (todo, index) => {
-                return index !== action.id;
+            return Object.assign({}, state, {
+                items: state.items.filter( item => {
+                    return item.id !== action.id;
+                })
             });
 
         default:

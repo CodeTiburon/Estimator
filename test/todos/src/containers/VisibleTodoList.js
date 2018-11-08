@@ -5,10 +5,14 @@ import TodoList from '../components/TodoList';
 const getVisisbleTodos = (todos, filter) => {
     switch (filter) {
         case todoFilter.COMPLETED:
-            return todos.filter( todo => todo.completed );
+            return Object.assign({}, todos, {
+                items: todos.items.filter( item => item.completed )
+            });
 
         case todoFilter.UNCOMPLETED:
-            return todos.filter( todo => !todo.completed );
+            return Object.assign({}, todos, {
+                items: todos.items.filter( item => !item.completed )
+            });
 
         default:
             return todos;
