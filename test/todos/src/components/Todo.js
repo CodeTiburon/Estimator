@@ -1,13 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+
+import DoneIcon from '@material-ui/icons/Check';
+
 const Todo = ({text, completed, onClick}) => (
-    <li
+    <ListItem
+        button
         onClick={onClick}
-        className={completed ? 'completed' : ''}
     >
-        { (completed ? '*** ' : '') + text}
-    </li>
+        <ListItemIcon>
+            <DoneIcon />
+        </ListItemIcon>
+
+        <ListItemText primary={completed ? '* ' + text : text} />
+    </ListItem>
 );
 
 Todo.propTypes = {
