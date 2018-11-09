@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 const Link = ({active, children, onClick}) => {
     if (active) {
@@ -7,15 +8,16 @@ const Link = ({active, children, onClick}) => {
     }
 
     return (
-        <a
-            href="#"
+        <Button
+            variant="contained"
+            color="primary"
             onClick={(e) => {
                 e.preventDefault();
                 onClick();
             }}
         >
             {children}
-        </a>
+        </Button>
     );
 }
 
