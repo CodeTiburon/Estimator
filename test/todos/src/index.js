@@ -22,7 +22,6 @@ store.dispatch( addTodo('Ask to unplug headphones') );
 
 store.dispatch( toggleTodo(2) );
 
-
 ReactDOM.render(
     <Provider store={store}>
         <App />

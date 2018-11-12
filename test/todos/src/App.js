@@ -9,7 +9,6 @@ import VisibleAppBar from './containers/VisibleAppBar';
 import VisibleDrawer from './containers/VisibleDrawer';
 import VisibleFiltersBar from './containers/VisibleFiltersBar';
 import VisibleTodoList from './containers/VisibleTodoList';
-import AddTodo from './containers/AddTodo';
 
 const styles = theme => ({
     root: {
@@ -38,7 +37,6 @@ const App = (props) => {
                 <VisibleFiltersBar />
 
                 <VisibleTodoList />
-                <AddTodo />
             </main>
         </div>
     );

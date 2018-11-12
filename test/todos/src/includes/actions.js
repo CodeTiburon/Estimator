@@ -12,6 +12,7 @@ export const defaultState = {
     },
     todos: {
         nextId: 0,
+        editId: null,
         items: [],
     }
 }
@@ -20,6 +21,7 @@ export const actionTodo = {
     ADD: 'action.todo.add',
     REMOVE: 'action.todo.remove',
     TOGGLE: 'action.todo.toggle',
+    EDIT: 'action.todo.edit',
 }
 
 export const actionVisibility = {
@@ -32,9 +34,22 @@ export const actionDrawer = {
     LEAVE: 'action.drawer.leave',
 }
 
+export const actionDialog = {
+    CLOSE: 'action.dialog.close',
+    OPEN: 'action.dialog.open',
+}
+
 export function addTodo(text) {
     return {
         type: actionTodo.ADD,
+        text: text,
+    }
+}
+
+export function editTodo(id, text) {
+    return {
+        type: actionTodo.EDIT,
+        id: id,
         text: text,
     }
 }
@@ -75,5 +90,18 @@ export function hoverDrawer() {
 export function leaveDrawer() {
     return {
         type: actionDrawer.LEAVE,
+    }
+}
+
+export function closeDialog() {
+    return {
+        type: actionDialog.CLOSE,
+    }
+}
+
+export function openDialog(id = null) {
+    return {
+        type: actionDialog.OPEN,
+        id: id,
     }
 }

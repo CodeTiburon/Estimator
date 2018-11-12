@@ -7,6 +7,7 @@ import {
     actionTodo,
     actionVisibility,
     actionDrawer,
+    actionDialog,
 } from './actions.js';
 
 function todos(state = defaultState.todos, action) {
@@ -14,7 +15,7 @@ function todos(state = defaultState.todos, action) {
         case actionTodo.ADD:
             const nextId = state.items.length ? state.nextId + 1 : 0;
 
-            return {
+            return Object.assign({}, state, {
                 nextId: nextId,
                 items: [
                     ...state.items,
@@ -24,7 +25,7 @@ function todos(state = defaultState.todos, action) {
                         completed: false,
                     }
                 ],
-            }
+            });
 
         case actionTodo.TOGGLE:
             return Object.assign({}, state, {
@@ -39,11 +40,34 @@ function todos(state = defaultState.todos, action) {
                 })
             });
 
+        case actionTodo.EDIT:
+            return Object.assign({}, state, {
+                items: state.items.map( item => {
+                    if ( item.id === action.id ) {
+                        return Object.assign({}, item, {
+                            text: action.text,
+                        });
+                    }
+
+                    return item;
+                })
+            });
+
         case actionTodo.REMOVE:
             return Object.assign({}, state, {
                 items: state.items.filter( item => {
                     return item.id !== action.id;
                 })
+            });
+
+        case actionDialog.CLOSE:
+            return Object.assign({}, state, {
+                editId: null,
+            });
+
+        case actionDialog.OPEN:
+            return Object.assign({}, state, {
+                editId: action.id,
             });
 
         default:

@@ -23,19 +23,37 @@ const FilterIcon = ({icon}) => (
     <Hidden smDown>{icon}</Hidden>
 )
 
-const FiltersBar = ( {classes, value, onTabChange} ) => (
-    <AppBar position="static" color="default" elevation="1">
-        <Tabs
-            value={value}
-            onChange={ (e, value) => onTabChange(value) }
-            indicatorColor="primary"
-        >
-            <Tab className={classes.filterTab} value={todoFilter.ALL} icon={<FilterIcon icon=<AllIcon /> />} label="All" />
-            <Tab className={classes.filterTab} value={todoFilter.UNCOMPLETED} icon={<FilterIcon icon=<PendingIcon /> />} label="Pending" />
-            <Tab className={classes.filterTab} value={todoFilter.COMPLETED} icon={<FilterIcon icon=<CompletedIcon /> />} label="Completed" />
-        </Tabs>
-    </AppBar>
-)
+const FiltersBar = ( {classes, value, onTabChange} ) => {
+    return (
+        <AppBar position="static" color="default" elevation={1}>
+            <Tabs
+                value={value}
+                onChange={ (e, value) => onTabChange(value) }
+                indicatorColor="primary"
+            >
+                <Tab
+                    className={classes.filterTab}
+                    value={todoFilter.ALL}
+                    icon={<FilterIcon icon=<AllIcon /> />}
+                    label="All"
+                />
+
+                <Tab
+                    className={classes.filterTab}
+                    value={todoFilter.UNCOMPLETED}
+                    icon={<FilterIcon icon=<PendingIcon /> />}
+                    label="Pending"
+                />
+
+                <Tab
+                    className={classes.filterTab}
+                    value={todoFilter.COMPLETED}
+                    icon={<FilterIcon icon=<CompletedIcon /> />}
+                    label="Completed" />
+            </Tabs>
+        </AppBar>
+    );
+}
 
 FiltersBar.propTypes = {
     value: PropTypes.number.isRequired,
