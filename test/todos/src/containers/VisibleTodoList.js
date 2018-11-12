@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { todoFilter, toggleTodo, openDialog } from '../includes/actions';
+import { todoFilter, toggleTodo, openDialog, removeTodo } from '../includes/actions';
 import TodoList from '../components/TodoList';
 
 const getVisisbleTodos = (todos, filter) => {
@@ -29,10 +29,15 @@ const mapDispatchToProps = dispatch => {
     return {
         onTodoClick: id => {
             dispatch( toggleTodo(id) );
-            // dispatch( openDialog(id) );
         },
         onAddClick: () => {
             dispatch( openDialog(-1) );
+        },
+        onEditClick: id => {
+            dispatch( openDialog(id) );
+        },
+        onDeleteClick: id => {
+            dispatch( removeTodo(id) );
         },
     }
 }
