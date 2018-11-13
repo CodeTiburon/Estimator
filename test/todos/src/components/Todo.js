@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -16,33 +17,32 @@ const styles = theme => ({
         textDecoration: 'line-through',
         fontStyle: 'italic',
     },
-    // hide: {
-    //     display: 'block',
-    // }
 });
 
 const Todo = ({classes, theme, text, completed, onClick, onDelete, onEdit}) => (
-    <ListItem
-        button
-        onClick={onClick}
-        className={classes.root}
-    >
-        <ListItemText primary={text} className={completed ? classes.completed : ''} />
+    <div className='todo-item'>
+        <ListItem
+            button
+            onClick={onClick}
+            className={classNames(classes.root, 'todo-item')}
+        >
+            <ListItemText primary={text} className={completed ? classes.completed : ''} />
 
-        <ListItemSecondaryAction>
-            <Tooltip title="Edit">
-                <IconButton onClick={onEdit}>
-                    <EditIcon />
-                </IconButton>
-            </Tooltip>
+            <ListItemSecondaryAction className="todo-item-actions">
+                <Tooltip title="Edit">
+                    <IconButton onClick={onEdit}>
+                        <EditIcon />
+                    </IconButton>
+                </Tooltip>
 
-            <Tooltip title="Delete">
-                <IconButton size="small" onClick={onDelete}>
-                    <DeleteIcon />
-                </IconButton>
-            </Tooltip>
-        </ListItemSecondaryAction>
-    </ListItem>
+                <Tooltip title="Delete">
+                    <IconButton size="small" onClick={onDelete}>
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
+            </ListItemSecondaryAction>
+        </ListItem>
+    </div>
 );
 
 Todo.propTypes = {
