@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { setVisibility } from '../includes/actions';
 import FiltersBar from '../components/FiltersBar';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         value: state.filter,
     }

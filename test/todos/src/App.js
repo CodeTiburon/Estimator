@@ -21,7 +21,8 @@ const styles = theme => ({
 });
 
 const App = (props) => {
-    const { classes } = props;
+    const { classes, match } = props;
+    const filter = match.params.filter;
 
     return (
         <div className={classes.root}>
@@ -36,7 +37,7 @@ const App = (props) => {
 
                 <VisibleFiltersBar />
 
-                <VisibleTodoList />
+                <VisibleTodoList filter={filter} />
             </main>
         </div>
     );

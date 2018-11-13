@@ -19,9 +19,22 @@ const getVisisbleTodos = (todos, filter) => {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+    let filter;
+
+    switch ( ownProps.filter ) {
+        case 'pending':
+            filter = todoFilter.UNCOMPLETED;
+            break;
+        case 'completed':
+            filter = todoFilter.COMPLETED;
+            break;
+        default:
+            filter = todoFilter.ALL;
+    }
+
     return {
-        todos: getVisisbleTodos(state.todos, state.filter),
+        todos: getVisisbleTodos(state.todos, filter),
     }
 }
 

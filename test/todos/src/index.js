@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import { createStore } from 'redux';
 
 import * as serviceWorker from './serviceWorker';
@@ -22,7 +22,7 @@ store.dispatch( addTodo('Ask to unplug headphones') );
 
 store.dispatch( toggleTodo(2) );
 
-ReactDOM.render(
+render(
     <Root store={store} />,
     document.getElementById('root')
 );

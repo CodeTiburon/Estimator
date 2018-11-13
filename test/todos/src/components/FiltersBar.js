@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,11 +20,28 @@ const styles = theme => ({
     },
 });
 
-const FilterIcon = ({icon}) => (
-    <Hidden smDown>{icon}</Hidden>
-)
-
 const FiltersBar = ( {classes, value, onTabChange} ) => {
+    const tabs = [
+        {
+            value: todoFilter.ALL,
+            label: 'All',
+            icon: <AllIcon />,
+            link: '/',
+        },
+        {
+            value: todoFilter.UNCOMPLETED,
+            label: 'Pending',
+            icon: <PendingIcon />,
+            link: '/pending',
+        },
+        {
+            value: todoFilter.COMPLETED,
+            label: 'Complete',
+            icon: <CompletedIcon />,
+            link: '/completed',
+        },
+    ];
+
     return (
         <AppBar position="static" color="default" elevation={1}>
             <Tabs
@@ -31,25 +49,19 @@ const FiltersBar = ( {classes, value, onTabChange} ) => {
                 onChange={ (e, value) => onTabChange(value) }
                 indicatorColor="primary"
             >
-                <Tab
-                    className={classes.filterTab}
-                    value={todoFilter.ALL}
-                    icon={<FilterIcon icon=<AllIcon /> />}
-                    label="All"
-                />
 
-                <Tab
-                    className={classes.filterTab}
-                    value={todoFilter.UNCOMPLETED}
-                    icon={<FilterIcon icon=<PendingIcon /> />}
-                    label="Pending"
-                />
+                {tabs.map( item => (
+                        <Tab
+                            className={classes.filterTab}
+                            value={item.value}
+                            icon={<Hidden smDown>{item.icon}</Hidden>}
+                            label={item.label}
+                            key={item.value}
+                            component={Link}
+                            to={item.link}
+                        />
+                ))}
 
-                <Tab
-                    className={classes.filterTab}
-                    value={todoFilter.COMPLETED}
-                    icon={<FilterIcon icon=<CompletedIcon /> />}
-                    label="Completed" />
             </Tabs>
         </AppBar>
     );
