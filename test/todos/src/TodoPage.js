@@ -7,8 +7,7 @@ const TodoPage = ({match}) => {
 
     return (
         <div>
-            <VisibleFiltersBar />
-
+            <VisibleFiltersBar filter={filter} />
             <VisibleTodoList filter={filter} />
         </div>
     );

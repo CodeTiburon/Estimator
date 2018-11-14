@@ -8,7 +8,7 @@ export const defaultState = {
         items: [],
     },
     app: appDefaultState,
-    rest: postsDefaultState,
+    posts: postsDefaultState,
 }
 
 export const actionTodo = {

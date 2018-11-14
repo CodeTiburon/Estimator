@@ -8,7 +8,7 @@ import {
 } from './actions.js';
 
 import appApp from './appReducers.js';
-import { restApp } from './restReducers.js';
+import postsApp from './postsReducers.js';
 
 
 function todos(state = defaultState.todos, action) {
@@ -16,7 +16,8 @@ function todos(state = defaultState.todos, action) {
         case actionTodo.ADD:
             const nextId = state.items.length ? state.nextId + 1 : 0;
 
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 nextId: nextId,
                 items: [
                     ...state.items,
@@ -26,50 +27,57 @@ function todos(state = defaultState.todos, action) {
                         completed: false,
                     }
                 ],
-            });
+            };
 
         case actionTodo.TOGGLE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 items: state.items.map( item => {
                     if ( item.id === action.id ) {
-                        return Object.assign({}, item, {
+                        return {
+                            ...item,
                             completed: !item.completed,
-                        });
+                        }
                     }
 
                     return item;
-                })
-            });
+                }),
+            };
 
         case actionTodo.EDIT:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 items: state.items.map( item => {
                     if ( item.id === action.id ) {
-                        return Object.assign({}, item, {
+                        return {
+                            ...item,
                             text: action.text,
-                        });
+                        }
                     }
 
                     return item;
-                })
-            });
+                }),
+            }
 
         case actionTodo.REMOVE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 items: state.items.filter( item => {
                     return item.id !== action.id;
-                })
-            });
+                }),
+            }
 
         case actionDialog.CLOSE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 editId: null,
-            });
+            }
 
         case actionDialog.OPEN:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 editId: action.id,
-            });
+            }
 
         default:
             return state;
@@ -79,7 +87,7 @@ function todos(state = defaultState.todos, action) {
 const todoApp = combineReducers({
     app: appApp,
     todos: todos,
-    // rest: restApp,
+    posts: postsApp,
 });
 
 export default todoApp;

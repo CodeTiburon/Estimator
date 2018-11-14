@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -10,7 +11,7 @@ import { addTodo, removeTodo, toggleTodo } from './includes/actions';
 
 import App from './App';
 
-const store = createStore(todoApp);
+const store = createStore(todoApp, applyMiddleware(thunk) );
 
 store.dispatch( addTodo('Calculate money') );
 store.dispatch( addTodo('Order cat food') );

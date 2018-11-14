@@ -1,10 +1,23 @@
 import { connect } from 'react-redux';
-import { setVisibility } from '../includes/appActions';
+import { setVisibility, todoFilter } from '../includes/appActions';
 import FiltersBar from '../components/FiltersBar';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    let filter;
+
+    switch ( ownProps.filter ) {
+        case 'pending':
+            filter = todoFilter.UNCOMPLETED;
+            break;
+        case 'completed':
+            filter = todoFilter.COMPLETED;
+            break;
+        default:
+            filter = todoFilter.ALL;
+    }
+
     return {
-        value: state.app.filter,
+        value: filter,
     }
 }
 

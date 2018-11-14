@@ -14,17 +14,20 @@ function filterTodos(state = todoFilter.ALL, action) {
 function drawer(state = appDefaultState.drawer, action) {
     switch (action.type) {
         case actionDrawer.TOGGLE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 open: !state.open
-            });
+            };
         case actionDrawer.HOVER:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 hover: true
-            });
+            };
         case actionDrawer.LEAVE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 hover: false
-            });
+            };
         default:
             return state;
     }
