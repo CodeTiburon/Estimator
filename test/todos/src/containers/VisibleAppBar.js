@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { toggleDrawer } from '../includes/actions';
+import { toggleDrawer } from '../includes/appActions';
 import TodoAppBar from '../components/TodoAppBar';
 
 const mapStateToProps = state => {
     return {
-        open: state.drawer.open,
+        open: state.app.drawer.open,
     }
 }
 

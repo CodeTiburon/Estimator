@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { hoverDrawer, leaveDrawer } from '../includes/actions';
+import { hoverDrawer, leaveDrawer } from '../includes/appActions';
 import TodoDrawer from '../components/TodoDrawer';
 
 const mapStateToProps = state => {
     return {
-        open: state.drawer.open,
-        hover: state.drawer.hover,
+        open: state.app.drawer.open,
+        hover: state.app.drawer.hover,
     }
 }
 

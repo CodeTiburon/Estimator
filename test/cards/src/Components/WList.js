@@ -17,7 +17,7 @@ class WList extends React.Component {
 
         this.state = {
             // site: 'staging.codetiburon.com',
-            site: 'luxury.ctb',
+            site: 'ct2018.wp',
             posts: [],
             pageCount: 0,
             page: page,

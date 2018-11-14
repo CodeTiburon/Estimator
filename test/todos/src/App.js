@@ -1,4 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import './App.css';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -7,8 +11,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TopSpacer from './components/TopSpacer';
 import VisibleAppBar from './containers/VisibleAppBar';
 import VisibleDrawer from './containers/VisibleDrawer';
-import VisibleFiltersBar from './containers/VisibleFiltersBar';
-import VisibleTodoList from './containers/VisibleTodoList';
+
+import TodoPage from './TodoPage';
+import RestPage from './RestPage';
 
 const styles = theme => ({
     root: {
@@ -21,26 +26,34 @@ const styles = theme => ({
 });
 
 const App = (props) => {
-    const { classes, match } = props;
-    const filter = match.params.filter;
+    const { classes, store } = props;
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
+        <Provider store={store}>
+            <Router>
+                <div className={classes.root}>
+                    <CssBaseline />
 
-            <VisibleAppBar/>
+                    <VisibleAppBar/>
 
-            <VisibleDrawer />
+                    <VisibleDrawer />
 
-            <main className={classes.content}>
-                <TopSpacer />
+                    <main className={classes.content}>
+                        <TopSpacer />
 
-                <VisibleFiltersBar />
-
-                <VisibleTodoList filter={filter} />
-            </main>
-        </div>
+                        <Switch>
+                            <Route path="/rest" component={RestPage} />
+                            <Route path="/:filter?" component={TodoPage} />
+                        </Switch>
+                    </main>
+                </div>
+            </Router>
+        </Provider>
     );
+}
+
+App.propType = {
+    store: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(App);

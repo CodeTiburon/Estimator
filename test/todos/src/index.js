@@ -8,7 +8,7 @@ import './index.css';
 import todoApp from './includes/reducers';
 import { addTodo, removeTodo, toggleTodo } from './includes/actions';
 
-import Root from './Root';
+import App from './App';
 
 const store = createStore(todoApp);
 
@@ -23,7 +23,7 @@ store.dispatch( addTodo('Ask to unplug headphones') );
 store.dispatch( toggleTodo(2) );
 
 render(
-    <Root store={store} />,
+    <App store={store} />,
     document.getElementById('root')
 );
 

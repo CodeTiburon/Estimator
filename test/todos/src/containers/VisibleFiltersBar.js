@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { setVisibility } from '../includes/actions';
+import { setVisibility } from '../includes/appActions';
 import FiltersBar from '../components/FiltersBar';
 
 const mapStateToProps = (state) => {
     return {
-        value: state.filter,
+        value: state.app.filter,
     }
 }
 

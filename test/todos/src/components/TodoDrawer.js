@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +10,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import TodoIcon from '@material-ui/icons/List';
 
 import TopSpacer from './TopSpacer';
 
@@ -69,15 +72,30 @@ const TodoDrawer = (props) => {
             <TopSpacer />
 
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
+                <ListItem
+                    button
+                    component={Link}
+                    to="/"
+                >
+                    <ListItemIcon>
+                        <TodoIcon />
+                    </ListItemIcon>
 
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                    <ListItemText primary="Todos" />
+                </ListItem>
+
+                <ListItem
+                    button
+                    component={Link}
+                    to="/rest"
+                >
+                    <ListItemIcon>
+                        <InboxIcon />
+                    </ListItemIcon>
+
+                    <ListItemText primary="Remote test" />
+                </ListItem>
+
             </List>
 
             <Divider />

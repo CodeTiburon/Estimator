@@ -12,7 +12,7 @@ import AllIcon from '@material-ui/icons/ViewHeadline';
 import CompletedIcon from '@material-ui/icons/CheckCircleOutline';
 import PendingIcon from '@material-ui/icons/Update';
 
-import { todoFilter } from '../includes/actions';
+import { todoFilter } from '../includes/appActions';
 
 const styles = theme => ({
     filterTab: {

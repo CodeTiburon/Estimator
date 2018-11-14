@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { todoFilter, toggleTodo, openDialog, removeTodo } from '../includes/actions';
+import { toggleTodo, openDialog, removeTodo } from '../includes/actions';
+import { todoFilter } from '../includes/appActions';
 import TodoList from '../components/TodoList';
 
 const getVisisbleTodos = (todos, filter) => {

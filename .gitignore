@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules
-temp/
+._temp
 
 # testing
 coverage

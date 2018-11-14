@@ -27,7 +27,7 @@ class App extends Component {
                         </NavItem>
 
                         <NavItem>
-                            <NavLink href="/about" active={true}>About</NavLink>
+                            <NavLink href="/about" active>About</NavLink>
                         </NavItem>
 
                         <NavItem>

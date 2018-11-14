@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux';
 
 import {
-    todoFilter,
     defaultState,
 
     actionTodo,
-    actionVisibility,
-    actionDrawer,
     actionDialog,
 } from './actions.js';
+
+import appApp from './appReducers.js';
+import { restApp } from './restReducers.js';
+
 
 function todos(state = defaultState.todos, action) {
     switch (action.type) {
@@ -75,33 +76,10 @@ function todos(state = defaultState.todos, action) {
     }
 }
 
-function filterTodos(state = todoFilter.ALL, action) {
-    return (actionVisibility.SET === action.type) ? action.filter : state;
-}
-
-function drawer(state = defaultState.drawer, action) {
-    switch (action.type) {
-        case actionDrawer.TOGGLE:
-            return Object.assign({}, state, {
-                open: !state.open
-            });
-        case actionDrawer.HOVER:
-            return Object.assign({}, state, {
-                hover: true
-            });
-        case actionDrawer.LEAVE:
-            return Object.assign({}, state, {
-                hover: false
-            });
-        default:
-            return state;
-    }
-}
-
 const todoApp = combineReducers({
-    filter: filterTodos,
+    app: appApp,
     todos: todos,
-    drawer: drawer,
+    // rest: restApp,
 });
 
 export default todoApp;
