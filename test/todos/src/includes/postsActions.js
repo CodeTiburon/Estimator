@@ -1,51 +1,106 @@
+import axios from 'axios';
+
 export const postsState = {
-    INVALIDATE: 1,
-    LOADING: 2,
-    STABLE: 3,
+    INVALIDATE: 0,
+    LOADING: 1,
+    SUCCESS: 2,
+    ERROR: 3,
 }
 
 export const defaultState = {
     source: 'ct2018',
     state: postsState.INVALIDATE,
-    error: '',
-    posts: {
-        'ct2018': {
-            items: [],
-            lastUpdate: 0,
-        },
-    },
+    error: null,
+    info: {},
+
+    // posts: {
+    //     'ct2018': {
+    //         items: [],
+    //         lastUpdate: 0,
+    //     },
+    // },
 }
 
 export const actionPosts = {
     LOADING: 'action.posts.loading',
     SUCCESS: 'action.posts.success',
     ERROR: 'action.posts.error',
-    SWITCH: 'action.posts.switch',
+    SOURCE: 'action.posts.switch',
 }
 
-export function postsSwitchSource(source) {
+export const actionSource = {
+    LOADING: 'action.posts.loading',
+    SUCCESS: 'action.posts.success',
+    ERROR: 'action.posts.error',
+    SOURCE: 'action.posts.switch',
+}
+
+export const switchSource = source => {
+    return dispatch => {
+        dispatch( postsSourceStarted(source) );
+
+        axios
+            .get( `http://${source}/wp-json/`, {})
+            .then( result => {
+                dispatch( postsSourceLoaded(result.data) );
+            })
+            .catch( error => {
+                dispatch( postsSourceError(error.message) );
+            });
+    }
+}
+
+export function postsSourceStarted(source) {
     return {
-        type: actionPosts.SWITCH,
+        type: actionSource.LOADING,
         source,
     }
 }
 
-export function postsLoading() {
+export function postsSourceLoaded(info) {
     return {
-        type: actionPosts.LOADING,
+        type: actionSource.SUCCESS,
+        info,
     }
 }
 
-export function postsSuccess(posts) {
+export function postsSourceError(error) {
     return {
-        type: actionPosts.SUCCESS,
-        items: posts,
-    }
-}
-
-export function postsError(error) {
-    return {
-        type: actionPosts.ERROR,
+        type: actionSource.ERROR,
         error,
     }
 }
+
+// export function postsSwitchSource(name) {
+//     return {
+//         type: actionPosts.SOURCE,
+//         name,
+//     }
+// }
+//
+// export function postsError(name) {
+//     return {
+//         type: actionPosts.SOURCE,
+//         name,
+//     }
+// }
+
+// export function postsLoading() {
+//     return {
+//         type: actionPosts.LOADING,
+//     }
+// }
+//
+// export function postsSuccess(posts) {
+//     return {
+//         type: actionPosts.SUCCESS,
+//         items: posts,
+//     }
+// }
+//
+// export function postsError(error) {
+//     return {
+//         type: actionPosts.ERROR,
+//         error,
+//     }
+// }

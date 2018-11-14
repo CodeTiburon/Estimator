@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import todoApp from './includes/reducers';
 import { addTodo, removeTodo, toggleTodo } from './includes/actions';
+import { switchSource } from './includes/postsActions';
 
 import App from './App';
 
@@ -22,6 +23,8 @@ store.dispatch( addTodo('Order Minions HotWheels') );
 store.dispatch( addTodo('Ask to unplug headphones') );
 
 store.dispatch( toggleTodo(2) );
+
+store.dispatch( switchSource('ct2018.wp') );
 
 render(
     <App store={store} />,
