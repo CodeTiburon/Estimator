@@ -37,8 +37,33 @@ import {
 // });
 
 export default function postsApp(state = defaultState, action) {
-console.log(action);
     switch (action.type) {
+        case actionSource.CHANGING:
+            return {
+                ...state,
+                state: postsState.CHANGING,
+                prev_state: state.state,
+            };
+
+        case actionSource.CANCELCHANGE:
+            return {
+                ...state,
+                state: state.prev_state,
+            };
+
+        case actionSource.EMPTY:
+            return {
+                ...state,
+                state: postsState.EMPTY,
+                source: '',
+                error: null,
+                info: {},
+                posts: {
+                    lastUpdated: 0,
+                    items: [],
+                },
+            };
+
         case actionSource.LOADING:
             return {
                 ...state,

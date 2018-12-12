@@ -24,7 +24,7 @@ store.dispatch( addTodo('Ask to unplug headphones') );
 
 store.dispatch( toggleTodo(2) );
 
-store.dispatch( switchSource('ct2018.wp') );
+// store.dispatch( switchSource('ct2018.wp') );
 
 render(
     <App store={store} />,

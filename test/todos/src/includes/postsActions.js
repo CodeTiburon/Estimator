@@ -1,17 +1,26 @@
 import axios from 'axios';
 
 export const postsState = {
-    INVALIDATE: 0,
-    LOADING: 1,
-    SUCCESS: 2,
-    ERROR: 3,
+    EMPTY: 0,
+    CHANGING: 1,
+    CANCELCHANGE: 2,
+
+    LOADING: 300,
+    SUCCESS: 400,
+    ERROR: 500,
 }
 
 export const defaultState = {
-    source: 'ct2018',
-    state: postsState.INVALIDATE,
+    source: '',
+    // state: postsState.SUCCESS,
+    state: postsState.EMPTY,
+    prev_state: postsState.EMPTY,
     error: null,
     info: {},
+    posts: {
+        lastUpdated: 0,
+        items: [],
+    },
 
     // posts: {
     //     'ct2018': {
@@ -21,6 +30,18 @@ export const defaultState = {
     // },
 }
 
+export const actionSource = {
+    CHANGING: 'action.posts.changing',
+    CANCELCHANGE: 'action.posts.cancel_change',
+    EMPTY: 'action.posts.empty',
+
+
+    LOADING: 'action.posts.loading',
+    SUCCESS: 'action.posts.success',
+    ERROR: 'action.posts.error',
+    SOURCE: 'action.posts.switch',
+}
+
 export const actionPosts = {
     LOADING: 'action.posts.loading',
     SUCCESS: 'action.posts.success',
@@ -28,14 +49,25 @@ export const actionPosts = {
     SOURCE: 'action.posts.switch',
 }
 
-export const actionSource = {
-    LOADING: 'action.posts.loading',
-    SUCCESS: 'action.posts.success',
-    ERROR: 'action.posts.error',
-    SOURCE: 'action.posts.switch',
+export function setDomainChange() {
+    return {
+        type: actionSource.CHANGING,
+    }
+}
+
+export function setDomainChangeCancel() {
+    return {
+        type: actionSource.CANCELCHANGE,
+    }
 }
 
 export const switchSource = source => {
+    if ( !source.length ) {
+        return {
+            type: actionSource.EMPTY,
+        }
+    }
+
     return dispatch => {
         dispatch( postsSourceStarted(source) );
 
@@ -58,6 +90,7 @@ export function postsSourceStarted(source) {
 }
 
 export function postsSourceLoaded(info) {
+    console.log(info);
     return {
         type: actionSource.SUCCESS,
         info,
